@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 550 640" xmlns="http://www.w3.org/2000/svg">
+<g stroke="#000" stroke-width="10">
+<g fill="#444">
+<circle cx="270" cy="370" r="250"/>
+<circle cx="270" cy="220" r="200"/>
+</g>
+<g fill="#fff">
+<circle cx="195" cy="175" r="70"/>
+<circle cx="345" cy="175" r="70"/>
+</g>
+</g>
+<circle cx="195" cy="175" r="40"/>
+<circle cx="345" cy="175" r="40"/>
+<path d="m145 370c0-175 250-175 250 0l-125 250z" fill="#ffd801" stroke="#000" stroke-linejoin="round" stroke-width="10"/>
+</svg>

@@ -1,0 +1,2 @@
+podman build -t mholzer78/dev.corbie.api .
+podman run -p 3100:3100 -d --name dev.corbie.api --rm mholzer78/dev.corbie.api
