@@ -19,7 +19,7 @@ type InputType =
     | [number, string | number, string | number];
 
 router.get(
-    ['/*options'],
+    ['/','/*options'],
     async (req: Request, res: Response, next: NextFunction) => {
         let params = req.path.split('/');
         params.shift();
@@ -30,6 +30,9 @@ router.get(
 
         if (params[0]) {
             width = Number(params[0]);
+        } else {
+            width = 400;
+            height = 300;
         }
         if (params[1] && !isNaN(Number(params[1]))) {
             height = Number(params[1]);
@@ -51,6 +54,7 @@ router.get(
             'temp-' + crypto.randomBytes(20).toString('hex')
         );
         const imgSvg = cbLoremImage.svgAsXml(...options);
+        console.log(imgSvg)
 
         try {
             await fs.writeFile(filename + '.svg', imgSvg);
@@ -61,7 +65,7 @@ router.get(
 
         try {
             let { stdout, stderr } = await execAsync(
-                'inkscape "' + filename + '.svg" -o "' + filename + '.png"'
+                'rsvg-convert "' + filename + '.svg" -o "' + filename + '.png"'
             );
             if (stderr) {
                 console.error('Error:', stderr);
@@ -87,9 +91,6 @@ router.get(
         }
     }
 );
-router.get(['/'], (req: Request, res: Response, next: NextFunction) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'views', 'loremImage.html'));
-});
 
 function sleep(ms: number) {
     return new Promise((resolve) => {

@@ -18,7 +18,7 @@ app.use('/lorem-image', loremImageRoutes);
 app.use('/', homeRoutes);
 
 app.use((req:Request, res: Response, next:NextFunction) => {
-    res.status(404).sendFile(path.join(__dirname, '..','views', '404.html'));
+    res.status(404).redirect('https://api.corbie.dev/404');
 });
 
-app.listen(3100);
+app.listen(3000);
