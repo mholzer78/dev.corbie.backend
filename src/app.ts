@@ -1,5 +1,5 @@
 import path from 'path';
-import express,{ Request, Response, NextFunction } from "express";
+import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import { fileURLToPath } from 'url';
 
@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/lorem-image', loremImageRoutes);
 app.use('/', homeRoutes);
 
-app.use((req:Request, res: Response, next:NextFunction) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
     res.status(404).redirect('https://api.corbie.dev/404');
 });
 

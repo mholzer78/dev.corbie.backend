@@ -21,6 +21,8 @@ type InputType =
 router.get(
     ['/','/*options'],
     async (req: Request, res: Response, next: NextFunction) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        
         let params = req.path.split('/');
         params.shift();
 
@@ -54,7 +56,6 @@ router.get(
             'temp-' + crypto.randomBytes(20).toString('hex')
         );
         const imgSvg = cbLoremImage.svgAsXml(...options);
-        console.log(imgSvg)
 
         try {
             await fs.writeFile(filename + '.svg', imgSvg);
