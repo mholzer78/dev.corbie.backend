@@ -1,9 +1,9 @@
-import path from 'path';
+import path from 'node:path';
 import express, { Request, Response, NextFunction } from 'express';
-import fs from 'fs/promises';
-import { fileURLToPath } from 'url';
-import { promisify } from 'util';
-import { exec } from 'child_process';
+import fs from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
+import { exec } from 'node:child_process';
 import * as crypto from 'node:crypto';
 
 import cbLoremImage from '@corbie.dev/lorem-image';
@@ -19,10 +19,10 @@ type InputType =
     | [number, string | number, string | number];
 
 router.get(
-    ['/','/*options'],
+    ['/', '/*options'],
     async (req: Request, res: Response, next: NextFunction) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
-        
+
         let params = req.path.split('/');
         params.shift();
 
@@ -36,7 +36,7 @@ router.get(
             width = 400;
             height = 300;
         }
-        if (params[1] && !isNaN(Number(params[1]))) {
+        if (params[1] && !Number.isNaN(Number(params[1]))) {
             height = Number(params[1]);
         } else if (params[1]) {
             color = params[1];
@@ -45,15 +45,19 @@ router.get(
             color = params[2];
         }
 
-        const options: InputType = height
-            ? [width, height, color!]
-            : color
-              ? [width, color]
-              : [width];
+        let options: InputType;
+
+        if (height) {
+            options = [width, height, color!];
+        } else if (color) {
+            options = [width, color];
+        } else {
+            options = [width];
+        }
 
         const filename = path.join(
             __dirname,
-            'temp-' + crypto.randomBytes(20).toString('hex')
+            'temp-' + crypto.randomBytes(20).toString('hex'),
         );
         const imgSvg = cbLoremImage.svgAsXml(...options);
 
@@ -65,8 +69,8 @@ router.get(
         }
 
         try {
-            let { stdout, stderr } = await execAsync(
-                'rsvg-convert "' + filename + '.svg" -o "' + filename + '.png"'
+            let { stderr } = await execAsync(
+                'rsvg-convert "' + filename + '.svg" -o "' + filename + '.png"',
             );
             if (stderr) {
                 console.error('Error:', stderr);
@@ -80,8 +84,8 @@ router.get(
 
         try {
             await sleep(5000);
-            const { stdout, stderr } = await execAsync(
-                'rm ' + filename + '.svg ' + filename + '.png'
+            const { stderr } = await execAsync(
+                'rm ' + filename + '.svg ' + filename + '.png',
             );
             if (stderr) {
                 console.error('Error:', stderr);
@@ -90,7 +94,7 @@ router.get(
         } catch (error) {
             console.error('Delete failed:', error);
         }
-    }
+    },
 );
 
 function sleep(ms: number) {

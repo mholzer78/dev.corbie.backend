@@ -1,6 +1,6 @@
-import path from 'path';
+import path from 'node:path';
 import express, { Request, Response, NextFunction } from 'express';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
@@ -12,5 +12,5 @@ export default router.get(
     ['/'],
     (req: Request, res: Response, next: NextFunction) => {
         res.sendFile(path.join(__dirname, '..', '..', 'views', 'home.html'));
-    }
+    },
 );

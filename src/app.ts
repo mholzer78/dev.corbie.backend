@@ -1,7 +1,7 @@
-import path from 'path';
+import path from 'node:path';
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 
 import homeRoutes from './routes/home.js';
 import loremImageRoutes from './routes/loremImage.js';
