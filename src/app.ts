@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 import homeRoutes from './routes/home.js';
 import loremImageRoutes from './routes/loremImage.js';
+import { authRouter, productsRouter, usersRouter } from './routes/dummyApi.js';
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
@@ -16,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/lorem-image', loremImageRoutes);
+app.use('/auth', authRouter);
+app.use('/users', usersRouter);
+app.use('/products', productsRouter);
 app.use('/', homeRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction) => {

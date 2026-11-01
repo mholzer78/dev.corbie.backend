@@ -1,0 +1,104 @@
+[
+  {
+    "description": "  As a frontend developer using the corbie.dev API\n  I want to fetch user data and authenticate via HTTP endpoints\n  So that I can build and test client applications with realistic mock data",
+    "elements": [
+      {
+        "description": "",
+        "id": "users-and-authentication-api;successful-user-login-with-valid-credentials",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Successful user login with valid credentials",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the API base URL is \"http://localhost:3000/api/v1\"",
+            "match": {
+              "location": "tests/steps/api.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10721027
+            }
+          },
+          {
+            "arguments": [
+              {
+                "content": "{\n  \"email\": \"michael.hofer@example.at\",\n  \"password\": \"secretpassword123\"\n}",
+                "line": 12
+              }
+            ],
+            "keyword": "When ",
+            "line": 11,
+            "name": "I send a \"POST\" request to \"/auth/login\" with the payload:",
+            "match": {
+              "location": "tests/steps/api.steps.ts:14"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 7419992,
+              "error_message": "apiRequestContext.fetch: connect ECONNREFUSED ::1:3000\nconnect ECONNREFUSED 127.0.0.1:3000\nCall log:\n\u001b[2m  - → POST http://localhost:3000/auth/login\u001b[22m\n\u001b[2m    - user-agent: Playwright/1.64.0 (x64; fedora 44) node/25.9\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\u001b[2m    - Content-Type: application/json\u001b[22m\n\u001b[2m    - content-length: 67\u001b[22m\n\n    at World.<anonymous> (/home/mholzer78/Development/dev.corbie.backend/tests/steps/api.steps.ts:17:37)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "the response status code should be 200",
+            "match": {
+              "location": "tests/steps/api.steps.ts:25"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "the response body should contain an \"accessToken\"",
+            "match": {
+              "location": "tests/steps/api.steps.ts:32"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the response user role should be \"DEVELOPER\"",
+            "match": {
+              "location": "tests/steps/api.steps.ts:40"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@api",
+            "line": 9
+          },
+          {
+            "name": "@auth",
+            "line": 9
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "users-and-authentication-api",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Users and Authentication API",
+    "tags": [],
+    "uri": "tests/features/dummyApi/login_api.feature"
+  }
+]

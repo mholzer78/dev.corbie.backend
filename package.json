@@ -9,9 +9,13 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon dist/app.js",
-        "start-server": "node dist/app.js"
+        "start-server": "node dist/app.js",
+        "test:e2e": "cucumber-js",
+        "test:report": "node test/report.js"
     },
     "devDependencies": {
+        "@playwright/test": "^1.64.0",
+        "@cucumber/cucumber": "^12.9.0",
         "@types/express": "^5.0.5",
         "@types/node": "^24.10.1",
         "dotenv": "^17.2.3",
